@@ -1,0 +1,77 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+  <!--Loop over the `payload` variable, which is the list of articles-->
+  {{ .payload }}
+
+    <!-- Wrapper -->
+      <div id="wrapper">
+
+        <!-- Main -->
+          <div id="main">
+            <div class="inner">
+
+              <!-- Header -->
+               {{ template "menu.html" .}}
+
+              <!-- Banner -->
+              <section id="banner">
+                  <div class="content">
+                    <header>
+                        {{ $fImgs := index .json 1}} 
+                      <h1>Nasa Daily Images<br />
+                      </h1>
+                      <p>Powered By Nasa Daily Images API</p>
+                    </header>
+                    <p>{{ $fImgs.Explanation }}</p>
+                    <ul class="actions">
+                      <li><a href="#" class="button big">Learn More</a></li>
+                    </ul>
+                  </div>
+                  <span class="image object">
+                    {{ $fImgs := index .json 0}}
+                    <img src={{ $fImgs.Hdurl }} alt="" />
+                  </span>
+                </section>
+
+             
+  
+              <!-- Section -->
+            <section>
+                  <header class="major">
+                    <h2>Available Images</h2>
+                  </header>
+                  <div class="posts">
+                    {{range $key, $val := .NasaImgs }}
+                         <article>
+                            <a href="#" class="image"><img src="{{$val.Url}}" alt="" /></a>
+                            <h3> {{$val.Title}} </h3>
+                            <p  style="     padding-left:2vw; text-overflow: ellipsis; overflow: hidden; width: 325px;line-height: 25px;display: -webkit-box;  -webkit-line-clamp: 4;-webkit-box-orient: vertical; padding-top: 15px;" >{{ $val.Explanation  }} .</p>
+                            <ul class="actions">
+                              <li><a href="#" class="button">More</a></li>
+                            </ul>
+                    </article>    
+                    {{end}}
+            
+                   
+                  </div>
+                </section>
+
+            </div>
+          </div>
+
+     {{ template "sidebar.html" .}}
+
+      </div>
+
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/browser.min.js"></script>
+      <script src="assets/js/breakpoints.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
